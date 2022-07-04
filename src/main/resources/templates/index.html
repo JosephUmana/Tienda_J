@@ -5,13 +5,19 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Listado de clientes</h1>
+        <h2>Listado de clientes</h2>
+        <br>
+        <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
+        <br>
+        <br>
+        <div th:if="${clientes !=null and !clientes.empty}">
         <!-- comment <p>nombre: <span th:text="${cliente.nombre}"></span></p>
         <p>nombre: <span th:text="${cliente.apellidos}"></span></p>
         <p>nombre: <span th:text="${cliente.correo}"></span></p>
         <p>nombre: <span th:text="${cliente.telefono}"></span></p>
         <br>
         <br>-->
+        <header th:replace="Layout/Plantilla :: header"/>
         <table border="1">
             <thead>
                 <tr>
@@ -19,6 +25,8 @@
                     <th>Apellidos</th>
                     <th>Correo</th>
                     <th>Telefono</th>
+                    <th>Modificar</th>
+                    <th>Elimina</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,10 +35,12 @@
                     <td th:text="${item.apellidos}"></td>
                     <td th:text="${item.correo}"></td>
                     <td th:text="${item.telefono}"></td>
+                    <td><a th:href="@{/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
+                    <td><a th:href="@{/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td>
                    
                 </tr>
             </tbody>
         </table>
-
+</div>
     </body>
 </html>
