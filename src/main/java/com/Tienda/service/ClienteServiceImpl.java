@@ -4,8 +4,11 @@
  */
 package com.Tienda.service;
 
+import com.Tienda.dao.CategoriaDao;
 import com.Tienda.dao.ClienteDao;
+import com.Tienda.dao.CreditoDao;
 import com.Tienda.domain.Cliente;
+import com.Tienda.domain.Credito;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ public class ClienteServiceImpl implements ClienteService {
 @Autowired
 private ClienteDao clienteDao;
 
+@Autowired
+private CreditoDao creditoDao;
+
     @Override
     @Transactional(readOnly = true) 
     public List<Cliente> getClientes() {
@@ -25,6 +31,9 @@ private ClienteDao clienteDao;
     @Override
     @Transactional
     public void save(Cliente cliente) {
+     Credito credito = cliente.getCredito();
+     credito = creditoDao.save(credito);
+     cliente.setCredito(credito);
      clienteDao.save(cliente);
     }
 

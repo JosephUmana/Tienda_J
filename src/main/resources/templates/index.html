@@ -5,42 +5,39 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h2>Listado de clientes</h2>
-        <br>
-        <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
-        <br>
-        <br>
-        <div th:if="${clientes !=null and !clientes.empty}">
-        <!-- comment <p>nombre: <span th:text="${cliente.nombre}"></span></p>
-        <p>nombre: <span th:text="${cliente.apellidos}"></span></p>
-        <p>nombre: <span th:text="${cliente.correo}"></span></p>
-        <p>nombre: <span th:text="${cliente.telefono}"></span></p>
-        <br>
-        <br>-->
-        <header th:replace="Layout/Plantilla :: header"/>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
-                    <th>Modificar</th>
-                    <th>Elimina</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="item : ${clientes}">
-                    <td th:text="${item.nombre}"></td>
-                    <td th:text="${item.apellidos}"></td>
-                    <td th:text="${item.correo}"></td>
-                    <td th:text="${item.telefono}"></td>
-                    <td><a th:href="@{/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
-                    <td><a th:href="@{/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td>
-                   
-                </tr>
-            </tbody>
-        </table>
-</div>
+        <div class = "contenido"> 
+            
+            <h2>Nuestros articulos</h2>
+            <br>
+            <a th:href="@{/nuevoArticulo}">Nuevo Articulo</a>
+            <br>
+            <br>
+            <div th:if="${articulos !=null and !articulos.empty}">
+                <!-- comment <p>nombre: <span th:text="${cliente.nombre}"></span></p>
+                <p>nombre: <span th:text="${cliente.apellidos}"></span></p>
+                <p>nombre: <span th:text="${cliente.correo}"></span></p>
+                <p>nombre: <span th:text="${cliente.telefono}"></span></p>
+                <br>
+                <br>-->
+                <header th:replace="Layout/Plantilla :: header"/>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${articulos}">
+                            <td th:text="${item.descripcion}"></td>
+                            <td th:text="${#numbers.formatDecimal(item.precio, 3, 2)}"></td>
+                            <td><a href="@{/carrito/agregar} + {item.idArticulo}">Agregar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
     </body>
+</div>
 </html>
