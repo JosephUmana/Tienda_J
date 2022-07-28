@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
+<html xmlns:th="http://www.thymeleaf.org"      
+      xmlns="http://www.w3.org/1999/xhtml">    
+    <head>        <title>TechShop</title>        
+        <meta charset="UTF-8">            
+            <link th:href="@{/css/menu.css}" rel="stylesheet" type="text/css"/>    
+    </head>    
+    <body>        
+        <header th:replace="layout/plantilla :: header"/>        
+        <h2>Datos del cliente</h2>        
+        <a th:href="@{/cliente/listado}">Regresar
+        </a>        
+        <br/>        
+        <br/>        
+        <div class="contenido">            
+            <form th:action="@{/cliente/guardar}"                  
+                  method="POST"                  
+                  th:object="${cliente}">                
+                <input type="hidden" name="idCliente" th:field="*{idCliente}" />                
+                <label for="nombre">Nombre: </label>                
+                <input type="text" id="nombre" name="nombre" th:field="*{nombre}"/>                
+                <br/>                <label for="apellidos">Apellidos: 
+                </label>                
+                <input type="text" id="apellidos" name="apellidos" th:field="*{apellidos}"/>                
+                <br/>                <label for="correo">Correo: 
+                </label>                
+                <input type="email" id="correo" name="correo" th:field="*{correo}"/>                
+                <br/>                <label for="telefono">Teléfono: 
+                </label>                
+                <input type="tel" id="telefono" name="telefono" th:field="*{telefono}" />                
+                <br/>                <label for="limite">Límite: 
+                </label>                
+                <input type="number" id="limite" name="limite" th:field="*{credito.limite}" />                
+                <br/>                <input type="submit" name="guardar" value="Guardar" />            
+            </form>        
+        </div>    
     </body>
 </html>

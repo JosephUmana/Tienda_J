@@ -7,7 +7,7 @@
     <body>
         <div class = "contenido"> 
             
-            <h2>Nuestros articulos</h2>
+            <h2 th:text="#{index.titulo}">Nuestros articulos</h2>
             <br>
             <a th:href="@{/nuevoArticulo}">Nuevo Articulo</a>
             <br>
@@ -23,8 +23,9 @@
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Descripcion</th>
-                            <th>Precio</th>
+                            <th th:text="#{articulo.descripcion}">Descripcion</th>
+                            <th th:text="#{articulo.precio}">Precio</th>
+                            <th th:text="#{articulo.comprar}"></th>
                             
                         
                         </tr>
@@ -33,10 +34,13 @@
                         <tr th:each="item : ${articulos}">
                             <td th:text="${item.descripcion}"></td>
                             <td th:text="${#numbers.formatDecimal(item.precio, 3, 2)}"></td>
-                            <td><a href="@{/carrito/agregar} + {item.idArticulo}">Agregar</a></td>
+                            <td><a href="@{/carrito/agregar} + {item.idArticulo}" th:text="#{accion.agregar}">Agregar</a></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <p th:text="{articulo.no_mostrar}"></p>
             </div>
     </body>
 </div>

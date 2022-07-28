@@ -19,7 +19,7 @@ public class CategoriaController {
     @GetMapping("/categoria/listado")
     public String inicio(Model model){
       var categorias = categoriaService.getCategorias(false);
-      model.addAttribute("categoria", categorias);
+      model.addAttribute("categorias", categorias);
       return "/categorias/listado";
     }
     @GetMapping("/categoria/nuevo")
