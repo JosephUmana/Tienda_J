@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>    
+<html
+    xmlns:sec="http://thymeleaf.org/extras/spring-security">    
     <head>        
         <title>techShop</title>        
         <meta charset="UTF-8">        
@@ -11,7 +12,8 @@
         <div class="contenido">            
             <h2 th:text="#{articulo.titulo}">Listado de Articulos</h2>
             
-            <a th:href="@{/articulo/nuevo}" th:text="#{articulo.nuevo}">Nuevo Articulo</a>  
+            <a th:href="@{/articulo/nuevo}" th:text="#{articulo.nuevo}"
+               sec:authorize="hasRole('ROLE_ADMIN')">Nuevo Articulo</a>  
             <div th:if="${articulos != null and !articulos.empty}">                
                 <table border="1">                    
                     <thead>                        
@@ -20,8 +22,8 @@
                             <th th:text="#{articulo.precio}">Precio</th>                            
                             <th th:text="#{articulo.existencias}">Existencias</th>                            
                             <th th:text="#{articulo.activo}">Activo</th>                            
-                            <th th:text="#{accion.modificar}">Modificar</th>                            
-                            <th th:text="#{accion.eliminar}">Eliminar</th>                        
+                            <th th:text="#{accion.modificar}"sec:authorize="hasRole('ROLE_ADMIN')">Modificar</th>                            
+                            <th th:text="#{accion.eliminar}"sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>                        
                         </tr>                    
                     </thead>                    
                     <tbody>                        
@@ -30,8 +32,10 @@
                             <td th:text="${#numbers.formatDecimal(item.precio,3,2)}"></td>                            
                             <td th:text="${item.existencias}"></td>                            
                             <td><input type="checkbox" name="activo" th:checked="${item.activo}" disabled="true" /> </td>                            
-                            <td><a th:href="@{/articulo/modificar/} + ${item.idArticulo}" th:text="#{accion.modificar}">Modificar</a></td>                            
-                            <td><a th:href="@{/articulo/eliminar/} + ${item.idArticulo}" th:text="#{accion.eliminar}">Eliminar</a></td>                        
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/articulo/modificar/} + ${item.idArticulo}" 
+                            th:text="#{accion.modificar}">Modificar</a></td>                            
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/articulo/eliminar/} + ${item.idArticulo}" 
+                            th:text="#{accion.eliminar}">Eliminar</a></td>                        
                         </tr>                    
                     </tbody>                
                 </table>            

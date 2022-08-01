@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>    
+<html
+    xmlns:sec="http://thymeleaf.org/extras/spring-security">    
     <head>        
         <title>techShop</title>        
         <meta charset="UTF-8">        
@@ -19,8 +20,8 @@
                             <th>Correo</th>                            
                             <th>Teléfono</th>                            
                             <th>Límite</th>                            
-                            <th>Modificar</th>                            
-                            <th>Eliminar</th>                       
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Modificar</th>                            
+                            <th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>                       
                         </tr>                    
                     </thead>                    
                     <tbody>                        
@@ -28,10 +29,10 @@
                             <td th:text="${item.nombre}"></td>                            
                             <td th:text="${item.apellidos}"></td>                            
                             <td th:text="${item.correo}"></td>                            
-                            <td th:text="${item.telefono}"></td>                            
+                            <td th:text="${item.telefono}"></td>                             
                             <td th:text="${item.credito.limite}"></td>                            
-                            <td><a th:href="@{/cliente/modificar/} + ${item.idCliente}">Modificar</a></td>                            
-                            <td><a th:href="@{/cliente/eliminar/} + ${item.idCliente}">Eliminar</a></td>                        
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/modificar/} + ${item.idCliente}">Modificar</a></td>                            
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/eliminar/} + ${item.idCliente}">Eliminar</a></td>                        
                         </tr>                    
                     </tbody>                
                 </table>            
