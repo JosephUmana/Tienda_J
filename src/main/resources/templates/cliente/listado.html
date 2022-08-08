@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html
+    xmlns:sec="http://www.thymeleaf.org"
     xmlns:sec="http://thymeleaf.org/extras/spring-security">    
-    <head>        
-        <title>techShop</title>        
+    <head th:replace="layout/plantilla :: header">        
+        <title>techShop</title>          
         <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
         <link th:href="@{/css/menu.css}" rel="stylesheet" type="text/css"/>    
     </head>    
     <body>        
         <header th:replace="layout/plantilla :: header"/>        
-        <div class="contenido">            
+        <div class="contenido"> 
+            <section class="py-4 mb-4 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/cliente/ReporteClientes}">
+                                <i class="fas fa-file"></i>Reporte</a>
+                                </div>
+                                </div>
+                                </div> 
+            </section>
             <h2>Listado de Clientes</h2>            
             <div th:if="${clientes != null and !clientes.empty}">                
                 <table border="1">                    
